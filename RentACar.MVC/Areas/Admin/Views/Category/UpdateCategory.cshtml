@@ -1,0 +1,34 @@
+﻿@model CategoryUpdateDto
+<div class="card mb-grid w-50 ml-5 mt-5">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header-title">Kategori Ekle</div>
+
+
+    </div>
+    <div class="card-body collapse show" id="card1">
+        <form asp-action="UpdateCategory" asp-controller="Category" method="post" autocomplete="off" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            @if (TempData["CategoryError"] != null)
+            {
+                var message = (TempData["CategoryError"] as String);
+
+                <div class="row p-3 mb-2 bg-warning text-dark">
+                    <div class="col-md-12">
+                        <div>
+                            @message
+                        </div>
+                    </div>
+                </div>
+            }
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-group">
+                <label asp-for="CategoryName" class="form-label" for="exampleInputEmail1">Kategori İsmi</label>
+                <input asp-for="CategoryName" type="text" class="form-control" id="exampleInputEmail1" placeholder="Kategori İsmi">
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+        </form>
+    </div>
+</div>
+

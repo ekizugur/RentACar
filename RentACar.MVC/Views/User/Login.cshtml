@@ -1,0 +1,75 @@
+﻿
+@model UserLoginDto
+
+<link href="~/car-rental/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<div class="page-heading header-text" style="background-image: url(https://www.manzara.gen.tr/w1/1956-Chevrolet-Facebook-Kapa%C4%9F%C4%B1.jpg)">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              
+            <h1>Rent A Car</h1>
+            <span>Kiralama işlemleri için giriş yap</span>
+          </div>
+        </div>
+      </div>
+</div>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form asp-controller="User" asp-action="Login" method="post" asp-area="">
+                    <br /><br />
+                    <br /><br />
+                    <br /><br />
+                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" asp-for="Email" id="form3Example3" class="form-control form-control-lg"
+                               placeholder="Email adreinizi giriniz" />
+                        <label asp-for="Email" class="form-label" for="form3Example3">Email Adresi</label>
+                        
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <input type="password" id="form3Example4" asp-for="Password" class="form-control form-control-lg"
+                               placeholder="Şifrenizi giriniz." />
+                        <label asp-for=Password class="form-label" for="form3Example4">Şifre</label>
+                        
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Checkbox -->
+                        <div class="form-check mb-0">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" asp-for="RememberMe" />
+                            <label class="form-check-label" for="form2Example3" asp-for="RememberMe">
+                                Beni Hatırla
+                            </label>
+                        </div>
+                        <a href="#!" class="text-body">Parolanızı mı unuttunuz?</a>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="submit" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                            Giriş
+                        </button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">
+                            Henüz hesabınız yok mu? <a asp-controller="User" asp-action="Register"
+                                                      class="link-danger">Üye Ol</a>
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+

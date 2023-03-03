@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = null;
+}
+@model UserLoginDto
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rent A Car - Admin Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="~/admin/dist/css/adminx.css" media="screen" />
+</head>
+<body>
+    <div class="adminx-container d-flex justify-content-center align-items-center">
+        <div class="page-login">
+            <div class="text-center">
+                <a class="navbar-brand mb-4 h1" href="login.html">
+                    <img src="~/admin/demo/img/logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
+                    Rent A Car
+                </a>
+            </div>
+
+            <div class="card mb-0">
+                <div class="card-body">
+                    <a class="btn btn-labeled btn-block text-left btn-sm btn-facebook" href="#">
+                        <span class="btn-label">
+                            <i data-feather="facebook"></i>
+                        </span>
+                        Facebook ile Giriş Yap
+                    </a>
+                    <a class="btn btn-labeled btn-block text-left btn-sm btn-twitter" href="#">
+                        <span class="btn-label">
+                            <i data-feather="twitter"></i>
+                        </span>
+                        Twitter ile Giriş Yap
+                    </a>
+                </div>
+                <div class="card-seperator">
+                    <span>veya</span>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Auth" asp-action="Login" id="formAuthentication" class="mb-3" method="POST">
+                        <div asp-validation-summary="All"></div>                        
+                        <div class="form-group">
+                            <label asp-for="Email" class="form-label">Email Adresi</label>
+                            <input asp-for="Email" type="email" name="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" autofocus>
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="form-label">Şifre</label>
+                            <input asp-for="Password" type="password" name="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Şifre">
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input asp-for="RememberMe" type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label asp-for="RememberMe" class="custom-control-label" for="customCheck1">Beni Hatırla</label>
+                                <span asp-validation-for="RememberMe"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-block btn-primary">Giriş Yap</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="#"><small>Şifremi Unuttum</small></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- If you prefer jQuery these are the required scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="~/admin/dist/js/vendor.js"></script>
+    <script src="~/admin/dist/js/adminx.js"></script>
+
+    <!-- If you prefer vanilla JS these are the only required scripts -->
+    <!-- script src="~/admin/dist/js/vendor.js"></script>
+    <script src="~/admin/dist/js/adminx.vanilla.js"></script-->
+</body>
+</html>

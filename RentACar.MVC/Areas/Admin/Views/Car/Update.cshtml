@@ -1,0 +1,106 @@
+﻿@model CarUpdateDto
+<div class="card mb-grid w-50 ml-5 mt-5">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header-title">Araç Güncelle</div>
+
+
+    </div>
+    <div class="card-body collapse show" id="card1">
+        <form asp-action="Update" asp-controller="Car" method="post" autocomplete="off" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            @if (TempData["ImageUpdateError"] != null)
+            {
+                var message = (TempData["ImageUpdateError"] as String);
+
+                <div class="row p-3 mb-2 bg-warning text-dark">
+                    <div class="col-md-12">
+                        <div>
+                            @message
+                        </div>
+                    </div>
+                </div>
+            }
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="form-label" for="exampleFormControlSelect1">Kategori</label>
+                <select class="form-control" id="exampleFormControlSelect1" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","CategoryName"))">
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="form-label" for="exampleFormControlSelect1">Marka</label>
+                <select class="form-control" id="exampleFormControlSelect2" asp-for="BrandId" asp-items="@(new SelectList(Model.Brands,"Id","Name"))">
+                    <span asp-validation-for="BrandId" class="text-danger"></span>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Model" class="form-label" for="exampleInputEmail1">Model</label>
+                <input asp-for="Model" type="text" class="form-control" id="exampleInputEmail1" placeholder="Araç Modeli">
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kilometer" class="form-label">Kilometre</label>
+                <input asp-for="Kilometer" type="text" class="form-control" id="kilometer" placeholder="Araç Kilometresi">
+                <span asp-validation-for="Kilometer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="ProductionYear" class="form-label">Üretim Yılı</label>
+                <input asp-for="ProductionYear" type="text" class="form-control" id="productionyear" placeholder="Araç Üretim Yılı">
+                <span asp-validation-for="ProductionYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="FuelType" class="form-label">Yakıt Türü</label>
+                <input asp-for="FuelType" type="text" class="form-control" id="FuelType" placeholder="Araç Yakıt Türü">
+                <span asp-validation-for="FuelType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Price" class="form-label">Günlük Kira Bedeli</label>
+                <input asp-for="Price" type="text" class="form-control" id="Price" placeholder="Günlük Kira Bedeli">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Image.FileName" for="defaultFormControlInput" name="ImageFile" class="form-label d-block">Mevcut Resim</label>
+                <input type="hidden" asp-for="Image.FileName"/>
+                
+                <img style="height:25em; width:40em;" class="mb-3" name="ImageFile" src="~/images/@Model.Image.FileName" alt="@Model.Model" />
+            </div>
+            <div class="form-group">
+                <label asp-for=Description class="form-label">Açıklama</label>
+                <textarea asp-for="Description" id="summernote"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Photo" class="form-label">Lütfen Resim Seçiniz</label>
+                <input asp-for="Photo" type="file" class="form-control" id="Photo" placeholder="Lütfen resim seçiniz">
+            </div>
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Araç Hakkında...',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture',]],
+            ['view', ['codeview', 'help']]
+        ]
+    });
+</script>

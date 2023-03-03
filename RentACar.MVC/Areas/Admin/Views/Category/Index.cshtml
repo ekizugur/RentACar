@@ -1,0 +1,56 @@
+﻿@model List<CategoryDto>
+
+<div class="col w-75">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Kategori Listesi</div>
+            <div class="card-header-title">
+                <a asp-action="AddCategory" asp-controller="Category"><li class="btn btn-success btn-sm">Kategori Ekle</li></a>
+
+            </div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0" >
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Kategori Adı</th>
+                        <th scope="col">Oluşturulma Tarihi</th>
+
+                        <th scope="col">Oluşturan Kullanıcı</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <th scope="row">
+                                <label class="custom-control custom-checkbox m-0 p-0">
+                                    <input type="checkbox" class="custom-control-input table-select-row">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </th>
+                            <td>@category.CategoryName</td>
+                            <td>@category.CreatedDate.DateTime</td>
+                            <td>@category.CreatedBy</td>
+                            <th></th>
+                            <td>
+                                <a class="btn btn-sm btn-primary" data-id="@category.Id" asp-area="Admin" asp-action="UpdateCategory" asp-route-categoryId="@category.Id">Güncelle</a>
+                                <a class="btn btn-sm btn-danger" data-id="@category.Id" asp-area="Admin" asp-controller="Category" asp-action="SafeDelete" asp-route-categoryId="@category.Id">Sil</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@model CommentAddDto
+<div class="callback-form contact-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="section-heading">
+              <h2> Araç için bir <em>yorum</em> bırak</h2>
+              <span>Araç hakkındaki görüşlerinizi paylaşabilirsiniz.</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="contact-form">
+              <form id="contact" asp-action="AddComment" asp-controller="Comment" method="post">
+                  <input type="hidden" asp-for="CarId" />
+                  <input type="hidden" asp-for="UserId" />
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="FullName" asp-for="FullName" type="text" class="form-control" id="FullName" placeholder="Ad Soyad" required="" value="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12">
+                    <fieldset>
+                        <input name="email" type="email" class="form-control" asp-for="Email" id="email" placeholder="E-Mail Adres" required="" value="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="CommentText" asp-for="CommentText" rows="6" class="form-control" id="CommentText" placeholder="Yorumunuz" required="" value=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Gönder</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

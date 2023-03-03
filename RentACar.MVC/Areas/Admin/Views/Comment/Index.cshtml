@@ -1,0 +1,191 @@
+﻿@model List<CommentDto>
+
+
+
+
+<div class="col">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Yayında Olan Yorum Listesi</div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Yorum Yapan</th>
+                        <th scope="col">Yorum Yapılma Tarihi</th>
+                        <th scope="col">Yorum İçeriği</th>
+                        <th scope="col">Yorum Durumu</th>
+                        
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var comment in Model.Where(x=>x.IsApproved==true && x.IsDeleted==false))
+                    {
+                        <tr>
+                            <th scope="row">
+                                <label class="custom-control custom-checkbox m-0 p-0">
+                                    <input type="checkbox" class="custom-control-input table-select-row">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </th>
+                            
+                            <td>@comment.CreatedBy</td>
+                            <td>@comment.CreatedDate.Date.ToShortDateString()</td>
+                            <td>@comment.CommentText</td>
+                            <td>@(comment.IsApproved ? "Yayında" : "Pasif")</td>
+                            
+                           
+
+                            <td>
+                                <a class="btn btn-sm btn-outline-success" data-id="@comment.Id" asp-area="Admin" asp-controller="Comment" asp-action="IsNotApproved" asp-route-commentId="@comment.Id">Yayından Kaldır</a>
+                                <a class="btn btn-sm btn-primary" data-id="@comment.Id" asp-area="Admin" asp-action="Update" asp-controller="comment" asp-route-commentId="@comment.Id">Güncelle</a>
+                                <a class="btn btn-sm btn-danger" data-id="@comment.Id" asp-area="Admin" asp-controller="Comment" asp-action="SafeDelete" asp-route-commentId="@comment.Id">Sil</a>
+
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="col">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Onay Bekleyen Yorumların Listesi</div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Yorum Yapan</th>
+                        <th scope="col">Yorum Yapılma Tarihi</th>
+                        <th scope="col">Yorum İçeriği</th>
+                        <th scope="col">Yorum Durumu</th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var comment in Model.Where(x => x.IsApproved == false && x.IsDeleted==false))
+                    {
+                        <tr>
+                            <th scope="row">
+                                <label class="custom-control custom-checkbox m-0 p-0">
+                                    <input type="checkbox" class="custom-control-input table-select-row">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </th>
+
+                            <td>@comment.CreatedBy</td>
+                            <td>@comment.CreatedDate.Date.ToShortDateString()</td>
+                            <td>@comment.CommentText</td>
+                            <td>@(comment.IsApproved ? "Yayında" : "Pasif")</td>
+
+
+
+                            <td>
+                                <a class="btn btn-sm btn-outline-success" data-id="@comment.Id" asp-area="Admin" asp-controller="Comment" asp-action="IsApproved" asp-route-commentId="@comment.Id">Yorumu Yayınla</a>                                
+                                <a class="btn btn-sm btn-primary" data-id="@comment.Id" asp-area="Admin" asp-action="Update" asp-route-commentId="@comment.Id">Güncelle</a>
+                                <a class="btn btn-sm btn-danger" data-id="@comment.Id" asp-area="Admin" asp-controller="Comment" asp-action="SafeDelete" asp-route-commentId="@comment.Id">Sil</a>
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Silinen Yorumların Listesi</div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Yorum Yapan</th>
+                        <th scope="col">Yorum Yapılma Tarihi</th>
+                        <th scope="col">Yorum İçeriği</th>
+                        <th scope="col">Silen Kullanıcı</th>
+                        <th scope="col">Silinme Tarihi</th>
+                        <th scope="col">Yorum Durumu</th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var comment in Model.Where(x => x.IsDeleted == true))
+                    {
+                        <tr>
+                            <th scope="row">
+                                <label class="custom-control custom-checkbox m-0 p-0">
+                                    <input type="checkbox" class="custom-control-input table-select-row">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </th>
+
+                            <td>@comment.CreatedBy</td>
+                            <td>@comment.CreatedDate.Date.ToShortDateString()</td>
+                            <td>@comment.CommentText</td>
+                            <td>@comment.IsDeletedBy</td>
+                            <td>@comment.DeletedTime</td>
+                            <td>@(comment.IsApproved ? "Yayında" : "Pasif")</td>
+
+
+
+                            <td>
+                                <a class="btn btn-sm btn-outline-success" data-id="@comment.Id" asp-area="Admin" asp-controller="Comment" asp-action="DeleteToActive" asp-route-commentId="@comment.Id">Yorumu Tekrar Yayınla</a>
+                                <a class="btn btn-sm btn-primary" data-id="@comment.Id" asp-area="Admin" asp-action="Update" asp-route-commentId="@comment.Id">Güncelle</a>
+                                
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

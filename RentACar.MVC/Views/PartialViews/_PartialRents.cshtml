@@ -1,0 +1,43 @@
+﻿@model List<CarRentalDto>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Marka</th>
+                <th scope="col">Model</th>
+                <th scope="col">Kiralama Başlangıç</th>
+                <th scope="col">Kiralama Bitiş</th>
+                <th scope="col">Ödeme</th>
+                <th scope="col">Durumu</th>
+                <th scope="col">Toplam Fiyat</th>
+                <th scope="col">Ödeme Numarası</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rental in Model)
+        {
+            <tr>
+                
+                <th scope="row">#</th>                
+                <td>@rental.Car.Brand.Name</td>
+                <td>@rental.Car.Model</td>
+                <td>@rental.RentDate</td>
+                <td>@rental.ReturnDate</td>
+                <td>@(rental.PaymentInfo.PaymentStatus ? "Ödendi":"Ödenmedi")</td>
+                <td>@(rental.IsActive ? "Aktif" : "Pasif")</td>
+                <td>@rental.PaymentInfo.PaymentAmount TL</td>
+                <td>@rental.PaymentId</td>
+                <form method="post" asp-controller="Rental" asp-action="RefundRequestUser">
+                    <input type="hidden" name="rentalId" value="@rental.Id"/>
+                    <input type="hidden" name="paymentTransactionId" value="@rental.TransactionId" />
+                    <input type="hidden" name="amount" value="@rental.PaymentInfo.PaymentAmount" />
+                    <td><button type="submit" class="btn btn-success">İade Talep Et</button></td>
+                </form>
+                
+            </tr>
+        }
+        </tbody>
+    </table>
+

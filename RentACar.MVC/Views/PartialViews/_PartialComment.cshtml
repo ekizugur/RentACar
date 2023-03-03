@@ -1,0 +1,60 @@
+﻿@model IPagedList<CommentDto>
+
+<div class="testimonials" style="margin: 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Araç Hakkındaki <em>Yorumlar</em></h2>
+                </div>
+                @if (Model.Count != 0)
+                {
+                    foreach (var comment in Model)
+                    {
+                        <div class="testimonial-item">
+                            <div class="inner-content">
+                                <img style="margin:0px auto 0px auto; width: 60px; height: 60px; object-fit: cover; border-radius: 50%;" class="mb-3" src="~/images/@comment.User.Image.FileName"/>
+                                
+                                <h4>@comment.User.FirstName @comment.User.LastName</h4>
+                                <span class="text-muted"><em>@comment.CreatedDate.DateTime.ToLongDateString()</em></span>
+                                <p>"@comment.CommentText"</p>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                                <a class="page-link" href="@Url.Action("Detail", new {carId = Model.FirstOrDefault().CarId, page = Model.PageNumber - 1 })" tabindex="-1">Önceki</a>
+                            </li>
+                            @for (int i = 1; i <= Model.PageCount; i++)
+                            {
+                                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Detail", new {carId = Model.FirstOrDefault().CarId, page = i })">@i</a>
+                                </li>
+                            }
+                            <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                                <a class="page-link" href="@Url.Action("Detail", new {carId = Model.FirstOrDefault().CarId, page = Model.PageNumber + 1 })">Sonraki</a>
+                            </li>
+                        </ul>
+                    </nav>
+                                         
+
+                }
+                else
+                {
+                    <div class="testimonial-item">
+                        <div class="inner-content">
+                            
+                            <p>Bu araç hakkında henüz yorum bulunmamaktadır.</p>
+                            
+                        </div>
+                    </div>
+                    <hr />
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>

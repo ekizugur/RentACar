@@ -1,0 +1,201 @@
+﻿@model X.PagedList.PagedList<RentACar.Data.DTOs.Cars.CarDto>
+
+<partial name="../PartialViews/_PartialSlider.cshtml" />
+
+    <!-- Banner Ends Here -->
+
+    <div class="request-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h4>Geri aranmak ister misin ?</h4>
+            <span>Bize bir mesaj bırakarak geri aranmak için talep bırakabilirsin.</span>
+          </div>
+          <div class="col-md-4">
+            <a href="contact.html" class="border-button">Bize Ulaş</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Öne Çıkarılan <em>Araçlar</em></h2>
+              <span>Size için öne çıkan araçlarımız.</span>
+            </div>
+          </div>
+
+          @foreach (var car in Model.Take(3))
+            {
+                
+            
+          <div class="col-md-4">
+            <div class="service-item">
+              <img src="~/images/@car.Image.FileName" alt="" style="height:30vh">
+              <div class="down-content">
+                <h4>@car.Brand.Name @car.Model</h4>
+                <div style="margin-bottom:10px;">
+                  <span>@car.Price₺ / Gün</span>
+                </div>
+               <p>Açıklamalar gelecek</p>
+                    <a asp-action="Detail" asp-controller="Car" data-id="@car.Id" class="filled-button" asp-route-carId="@car.Id">Hemen Kirala</a>
+              </div>
+            </div>
+            
+            <br>
+          </div>
+          }
+           <br>
+          </div>
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" tabindex="-1">Önceki</a>
+                </li>
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Sonraki</a>
+                </li>
+            </ul>
+        </nav>
+        
+        </div>
+      </div>
+    
+
+    <div class="fun-facts bottom-0">
+      <div class="container">
+        <div class="more-info-content">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="left-image">
+                <img src="~/car-rental/assets/images/about-1-570x350.jpg" class="img-fluid" alt="">
+              </div>
+            </div>
+            <div class="col-md-6 align-self-center">
+              <div class="right-content">
+                <span>Biz Kimiz</span>
+                    <h2> <em>Firmamız </em> hakkında bilgi sahibi olun</h2>
+                <p>hakkımızda sayfasından gelecek.</p>
+                <a href="about.html" class="filled-button">Devamını Oku</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonials">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+                <h2>Kullanıcılar<em> bizim hakkımızda</em> neler söyledi</h2>
+              <span>Müşterilerimizden görüşler</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="owl-testimonials owl-carousel">
+              
+              <div class="testimonial-item">
+                <div class="inner-content">
+                  <h4>George Walker</h4>
+                  <span>Chief Financial Analyst</span>
+                  <p>"Nulla ullamcorper, ipsum vel condimentum congue, mi odio vehicula tellus, sit amet malesuada justo sem sit amet quam. Pellentesque in sagittis lacus."</p>
+                </div>
+                <img src="http://placehold.it/60x60" alt="">
+              </div>
+              
+              <div class="testimonial-item">
+                <div class="inner-content">
+                  <h4>John Smith</h4>
+                  <span>Market Specialist</span>
+                  <p>"In eget leo ante. Sed nibh leo, laoreet accumsan euismod quis, scelerisque a nunc. Mauris accumsan, arcu id ornare malesuada, est nulla luctus nisi."</p>
+                </div>
+                <img src="http://placehold.it/60x60" alt="">
+              </div>
+              
+              <div class="testimonial-item">
+                <div class="inner-content">
+                  <h4>David Wood</h4>
+                  <span>Chief Accountant</span>
+                  <p>"Ut ultricies maximus turpis, in sollicitudin ligula posuere vel. Donec finibus maximus neque, vitae egestas quam imperdiet nec. Proin nec mauris eu tortor consectetur tristique."</p>
+                </div>
+                <img src="http://placehold.it/60x60" alt="">
+              </div>
+              
+              <div class="testimonial-item">
+                <div class="inner-content">
+                  <h4>Andrew Boom</h4>
+                  <span>Marketing Head</span>
+                  <p>"Curabitur sollicitudin, tortor at suscipit volutpat, nisi arcu aliquet dui, vitae semper sem turpis quis libero. Quisque vulputate lacinia nisl ac lobortis."</p>
+                </div>
+                <img src="http://placehold.it/60x60" alt="">
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callback-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2><em>İletişim Talebi </em></h2>
+              <span>sizinle iletişime geçebilmemiz için bir mesaj gönderin</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Ad ve Soyad" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email"  placeholder="E-Mail Adresi" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Konu" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Mesajın" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="border-button">Mesaj Gönder</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>

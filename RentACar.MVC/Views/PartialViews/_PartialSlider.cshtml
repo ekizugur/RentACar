@@ -1,0 +1,25 @@
+﻿@model X.PagedList.PagedList<RentACar.Data.DTOs.Cars.CarDto>
+<div class="main-banner header-text" id="top">
+
+    <div class="Modern-Slider">
+        <!-- Item -->
+        @foreach (var car in Model.Take(3))
+        {
+            <div class="item">
+                <div class="img-fill">
+                    <img src="~/images/@car.Image.FileName" class="img-fill">
+                    <div class="text-content">
+                        <h6>@car.Brand.Name</h6>
+                        <h4>@car.Model</h4>
+                        <p class="badge badge-pill badge-primary">@car.Category.CategoryName</p>
+                        <p>Araç Kilometresi: @car.Kilometer<br>Üretim Yılı: @car.ProductionYear </p>
+                        <a href="contact.html" class="filled-button">Hemen Kirala</a>
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

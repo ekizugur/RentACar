@@ -1,0 +1,68 @@
+﻿@model List<CarDto>
+
+<div class="col">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Silinen Araç Listesi</div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Marka</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Kilometre</th>
+                        <th scope="col">Üretildiği Yıl</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">Silen Kullanıcı</th>
+                        <th scope="col">Silinme Tarihi</th>
+                        <th scope="col">Kiralama Sayısı</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @foreach (var car in Model)
+                    {
+                        <tr>
+                            <th scope="row">
+                                <label class="custom-control custom-checkbox m-0 p-0">
+                                    <input type="checkbox" class="custom-control-input table-select-row">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </th>
+                            <td>@car.Brand.Name</td>
+                            <td>@car.Model</td>
+                            <td>@car.Category.CategoryName</td>
+                            <td>@car.Kilometer</td>
+                            <td>@car.ProductionYear</td>
+                            <td>@car.Price</td>
+                            <td>@car.IsDeletedBy</td>
+                            <td>@car.DeletedTime</td>
+                            <td>@car.FuelType</td>
+                            <td>@car.RentCount</td>
+
+                            <td>
+                                
+                                <a class="btn btn-sm btn-primary" data-id="@car.Id" asp-area="Admin" asp-action="DeletedCarUpdate" asp-route-carId="@car.Id">Güncelle</a>
+                                <a class="btn btn-sm btn-outline-success" data-id="@car.Id" asp-area="Admin" asp-controller="Car" asp-action="PassiveToActive" asp-route-carId="@car.Id">Yayına Al</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

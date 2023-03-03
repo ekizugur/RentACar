@@ -1,0 +1,54 @@
+﻿@model CarRentalDto
+<div class="page-heading header-text" style="background-image: url(@("/images/" + Model.Car.Image.FileName))">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>@Model.Car.Brand.Name</h1>
+            <span>@Model.Car.Model</span>
+          </div>
+        </div>
+      </div>
+    </div>
+<div>
+    <div class="container">
+        <div class="more-info-content">
+            <div class="right-content">
+                <div class="mt-5">
+                 
+                    <div class="alert alert-primary" role="alert">
+                        Kiralama işlemi başarıyla tamamlanmıştır. Kiralamanıza ait bilgileriniz aşağıda verilmiştir. Kiralamaya ait bilgileriniz mail olarak gönderilmiştir.
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="RentACar">Kiralanan Araç Markası:</label>
+                        <input id="RentACar" class="form-control" type="text" name="RentACar" value="@Model.Car.Brand.Name" readonly>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" for="RentACar">Kiralanan Araç Modeli:</label>
+                        <input id="RentACar" class="form-control" type="text" name="RentACar" value="@Model.Car.Model" readonly>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label"  for="RentACar">Kiralama Başlangıç Tarihi:</label>
+                        <input id="RentACar"  class="form-control" type="text" name="RentACar" value="@Model.RentDate" readonly>
+                    </div>
+                    <div class="form-group col-md-4">
+                    <label class="control-label" >Araç Teslim Tarihi:</label>
+                        <input id="EndTime" class="form-control" type="text" name="EndTime" value="@Model.ReturnDate" readonly>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label" asp-for="TotalPrice">Toplam Fiyat:</label>
+                        <div class="d-flex">
+                            <input  class="form-control" type="text" name="TotalPrice" value="@Model.TotalPrice" readonly="">
+                            <span class="mt-2 ml-2">TL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8O_frWmGw3JHvPU6pPiYENLdO7nIVa-hLcHnxuxTfY_NLdhKFATbjxoI1q9cOuToum9R3pR0xFymUrc3WS_p2WCMLC0OXBbTHAuaf0Jfyv7bE2fk1RdBbzT_OHdq90wzXJ1otX3Bd_T52j0COWiqPcHjVS8sGa1TDkkIvz36k34iWyg0cQ9l5sRexqmHNjivqA">
+
+    </div>
+
+</div>

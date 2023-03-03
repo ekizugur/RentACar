@@ -1,0 +1,88 @@
+﻿@model X.PagedList.PagedList<RentACar.Data.DTOs.Cars.CarDto>
+<div class="page-heading header-text" style="background-image: url(https://www.manzara.gen.tr/w1/1956-Chevrolet-Facebook-Kapa%C4%9F%C4%B1.jpg)">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1>Rent A Car</h1>
+                <span>Tüm Araçlar</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="services">
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Öne Çıkarılan <em>Araçlar</em></h2>
+                    <span>Sizin için öne çıkan araçlarımız.</span>
+                    <form id="search_form" asp-action="Search" asp-controller="Car" method="get">
+                        <input type="text" name="searchString" class="form-control form-control-lg" placeholder="Ara..." id="searchString" autocomplete="on">
+                        <div class="d-flex">
+                        <select name="categoryId"  class="form-control w-25 mt-3">
+                        <option value="">Tüm Kategoriler</option>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <option value="@category.Id">@category.CategoryName</option>
+                        }
+                        </select>
+
+                        <select name="brandId" class="form-control w-25 mt-3 ml-2">
+                        <option value="">Tüm Markalar</option>
+                        @foreach (var brand in ViewBag.Brands)
+                        {
+                            <option value="@brand.Id">@brand.Name</option>
+                        }
+                        </select>
+     
+                        <input type="text" name="minPrice" class="form-control w-25 mt-3 ml-2" placeholder="Minimum Fiyat" />
+                            <input type="text" name="maxPrice" class="form-control w-25 mt-3 ml-2" placeholder="Maksimum Fiyat" />
+                        
+                        <button class="btn btn-success mt-3 ml-2"> Filtrele</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+
+            @foreach (var car in Model)
+            {
+
+
+                <div class="col-md-4">
+                    <div class="service-item">
+                        <img src="~/images/@car.Image.FileName" alt="" style="height:30vh">
+                        <div class="down-content">
+                            <h4>@car.Brand.Name @car.Model</h4>
+                            <div style="margin-bottom:10px;">
+                                <span>@car.Price₺ / Gün</span>
+                            </div>
+                            <p>Açıklamalar gelecek</p>
+                            <a asp-action="Detail" asp-controller="Car" data-id="@car.Id" class="filled-button" asp-route-carId="@car.Id">Hemen Kirala</a>
+                        </div>
+                    </div>
+
+                    <br>
+                </div>
+            }
+            <br>
+        </div>
+        <nav aria-label="...">
+            <ul class="pagination pagination-lg justify-content-center">
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link" aria-label="Previous" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" tabindex="-1">«</a>
+                </li>
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">»</a>
+                </li>
+            </ul>
+        </nav>
+
+    </div></div>

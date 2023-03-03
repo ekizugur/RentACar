@@ -1,0 +1,130 @@
+﻿@model List<CarRentalDto>
+
+<div class="col">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Aktif Kiralama Listesi</div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Kiralanan Araç</th>
+                        <th scope="col">Kiralayan Kullanıcının Adı Soyadı</th>
+                        <th scope="col">Kiralayan Kullanıcının Email Adresi</th>
+                        <th scope="col">Kira Başlangıç Tarihi</th>
+                        <th scope="col">Araç Dönüş Tarihi</th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rental in Model)
+                    {
+                        
+                        <tr>
+                            <th scope="row">
+                                <label class="custom-control custom-checkbox m-0 p-0">
+                                    <input type="checkbox" class="custom-control-input table-select-row">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </th>
+
+                            <td>@rental.Car.Brand @rental.Car.Model</td>
+                            <td>@rental.User.FirstName @rental.User.LastName</td>
+                            <td>@rental.User.Email</td>
+                            <td>@rental.RentDate</td>
+                            <td>@rental.ReturnDate</td>
+
+
+
+                            <td>
+                                <a class="btn btn-sm btn-outline-success" data-id="@rental.Id" asp-area="Admin" asp-controller="Rental" asp-action="" asp-route-commentId="@rental.Id">..</a>
+                                <a class="btn btn-sm btn-primary" data-id="@rental.Id" asp-area="Admin" asp-action="" asp-controller="Rental" asp-route-commentId="@rental.Id">..</a>
+                                <a class="btn btn-sm btn-danger" data-id="@rental.Id" asp-area="Admin" asp-controller="Rental" asp-action="" asp-route-commentId="@rental.Id">..</a>
+
+                            </td>
+
+                        </tr>
+                        
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Pasif Kiralama Listesi</div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Kiralanan Araç</th>
+                        <th scope="col">Kiralayan Kullanıcının Adı Soyadı</th>
+                        <th scope="col">Kiralayan Kullanıcının Email Adresi</th>
+                        <th scope="col">Kira Başlangıç Tarihi</th>
+                        <th scope="col">Araç Dönüş Tarihi</th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rental in Model)
+                    {
+                        if (!rental.IsActive)
+                        {
+                                <tr>
+                                    <th scope="row">
+                                        <label class="custom-control custom-checkbox m-0 p-0">
+                                            <input type="checkbox" class="custom-control-input table-select-row">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </th>
+
+                                    <td>@rental.Car.Brand @rental.Car.Model</td>
+                                    <td>@rental.User.FirstName @rental.User.LastName</td>
+                                    <td>@rental.User.Email</td>
+                                    <td>@rental.RentDate</td>
+                                    <td>@rental.ReturnDate</td>
+
+
+
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-success" data-id="@rental.Id" asp-area="Admin" asp-controller="Rental" asp-action="" asp-route-commentId="@rental.Id">..</a>
+                                        <a class="btn btn-sm btn-primary" data-id="@rental.Id" asp-area="Admin" asp-action="" asp-controller="Rental" asp-route-commentId="@rental.Id">..</a>
+                                        <a class="btn btn-sm btn-danger" data-id="@rental.Id" asp-area="Admin" asp-controller="Rental" asp-action="" asp-route-commentId="@rental.Id">..</a>
+
+                                    </td>
+
+                                </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

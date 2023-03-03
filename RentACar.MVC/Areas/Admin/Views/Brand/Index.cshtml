@@ -1,0 +1,56 @@
+﻿@model List<BrandDto>
+
+<div class="col w-75">
+    <div class="card mb-grid mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <div class="card-header-title">Kategori Listesi</div>
+            <div class="card-header-title">
+                <a asp-action="Add" asp-controller="Brand"><li class="btn btn-success btn-sm">Marka Ekle</li></a>
+
+            </div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-actions table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <label class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </th>
+                        <th scope="col">Kategori Adı</th>
+                        <th scope="col">Oluşturulma Tarihi</th>
+
+                        <th scope="col">Oluşturan Kullanıcı</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var brand in Model)
+                    {
+                        <tr>
+                            <th scope="row">
+                                <label class="custom-control custom-checkbox m-0 p-0">
+                                    <input type="checkbox" class="custom-control-input table-select-row">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </th>
+                            <td>@brand.Name</td>
+                            <td>@brand.CreatedDate.DateTime</td>
+                            <td>@brand.CreatedBy</td>
+                            <th></th>
+                            <td>
+                                <a class="btn btn-sm btn-primary" data-id="@brand.Id" asp-area="Admin" asp-action="Update" asp-route-brandId="@brand.Id">Güncelle</a>
+                                <a class="btn btn-sm btn-danger" data-id="@brand.Id" asp-area="Admin" asp-controller="Brand" asp-action="SafeDelete" asp-route-brandId="@brand.Id">Sil</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
